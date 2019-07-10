@@ -25,7 +25,7 @@ junitparser = "*"
 slack = "*"
 
 [scripts]
-test = "pytest"
+test = "pythin -m pytest"
 
 [requires]
 python_version = "3.7"
