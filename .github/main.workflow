@@ -1,21 +1,15 @@
 workflow "CI" {
   on = "pull_request"
-  resolves = "Run tests"
+  resolves = "test"
 }
 
-action "Install pipenv" {
-  uses = "docker://python:3.7.2"
-  runs = ["pip", "install", "pipenv"]
+action "pipenv-sync" {
+  uses = "peaceiris/actions-pipenv@3.7"
+  args = ["sync"]
 }
 
-action "Install dependencies" {
-  needs = "Install pipenv"
-  uses = "docker://python:3.7.2"
-  runs = ["pipenv", "install", "--system", "--deploy"]
-}
-
-action "Run tests" {
-  needs = "Install dependencies"
-  uses = "docker://python:3.7.2"
-  runs = ["pytest"]
+action "test" {
+  needs = "pipenv-sync"
+  uses = "peaceiris/actions-pipenv@3.7"
+  args = ["run", "pytest"]
 }
