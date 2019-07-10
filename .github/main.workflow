@@ -3,16 +3,13 @@ workflow "CI" {
   resolves = "Run tests"
 }
 
-action "Install dependencies" {
+action "Install pipenv" {
   uses = "docker://python:3.7.2"
-  runs = [
-        "pip", "install", "pipenv", ";",
-        "pipenv", "install", "--system", "--deploy", ";"
-    ]
+  runs = ["pip", "install", "pipenv"]
 }
 
 action "Run tests" {
-  needs = "Install dependencies"
+  needs = "Install pipenv"
   uses = "docker://python:3.7.2"
-  runs = ["python", "-m", "pytest"]
+  runs = ["pipenv", "-v"]
 }
