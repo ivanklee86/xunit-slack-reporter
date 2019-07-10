@@ -1,2 +1,3 @@
-# junit-slack-reporter
-Github Action to send XUnit results to Slack
+# xUnit Slack Reporter
+
+Github Action to send xUnit results to Slack

@@ -1,0 +1,28 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+# Pytest
+pytest = "*"
+pytest-cov  = "*"
+#pytest-flake8 = "*"
+pytest-html  = "*"
+pytest-runner  = "*"
+pytest-rerunfailures  = "*"
+pytest-xdist = "*"
+pytest-mock = "*"
+coveralls = "*"
+# Linting
+mypy = "*"
+pylint = "*"
+# Utilities
+bumpversion = "*"
+
+[packages]
+junitparser = "*"
+slack = "*"
+
+[requires]
+python_version = "3.7"
