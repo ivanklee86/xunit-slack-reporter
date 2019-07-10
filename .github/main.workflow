@@ -1,6 +1,6 @@
 workflow "CI" {
   on = "pull_request"
-  resolves = "Run tests"
+  resolves = "test"
 }
 
 action "pipenv-sync" {
