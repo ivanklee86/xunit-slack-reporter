@@ -11,5 +11,5 @@ action "pipenv-sync" {
 action "test" {
   needs = "pipenv-sync"
   uses = "peaceiris/actions-pipenv@3.7"
-  args = ["run", "test"]
+  args = ["run", "pytest"]
 }
