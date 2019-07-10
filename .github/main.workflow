@@ -3,13 +3,13 @@ workflow "CI" {
   resolves = "Run tests"
 }
 
-action "Install pipenv" {
-  uses = "docker://python:3.7.2"
-  runs = ["pip", "install", "pipenv"]
+action "pipenv-sync" {
+  uses = "peaceiris/actions-pipenv@3.7"
+  args = ["sync"]
 }
 
-action "Run tests" {
-  needs = "Install pipenv"
-  uses = "docker://python:3.7.2"
-  runs = ["pipenv", "-v"]
+action "test" {
+  needs = "pipenv-sync"
+  uses = "peaceiris/actions-pipenv@3.7"
+  args = ["run", "test"]
 }
