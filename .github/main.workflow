@@ -4,13 +4,13 @@ workflow "CI" {
 }
 
 action "Install dependencies" {
-  uses = "./Dockerfile-build.local"
+  uses = "./build_env"
   runs = ["pipenv", "install"]
 
 }
 
 action "Run tests" {
   needs = "Install dependencies"
-  uses = "./Dockerfile-build.local"
+  uses = "./build_env"
   runs = ["pipenv", "run", "test"]
 }
