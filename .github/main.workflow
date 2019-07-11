@@ -1,28 +1,28 @@
 workflow "CI" {
   on = "pull_request"
-  resolves = "Run tests"
+  resolves = ["tests", "pylint", "mypy"]
 }
 
-action "Install dependencies" {
+action "install" {
   uses = "./build_action"
   runs = ["pipenv", "install", "--dev"]
 
 }
 
-action "Run tests" {
-  needs = "Install dependencies"
+action "tests" {
+  needs = "install"
   uses = "./build_action"
   runs = ["pipenv", "run", "test"]
 }
 
-action "Run pylint" {
-  needs = "Install dependencies"
+action "pylint" {
+  needs = "install"
   uses = "./build_action"
   runs = ["pipenv", "run", "pylint", "app"]
 }
 
-action "Run typechecker" {
-  needs = "Install dependencies"
+action "mypy" {
+  needs = "install"
   uses = "./build_action"
   runs = ["pipenv", "run", "mypy", "app"]
 }
