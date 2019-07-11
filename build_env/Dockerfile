@@ -11,9 +11,9 @@ LABEL MAINTAINER="Ivan Lee"
 # Labels
 # ---------------------------------------------------------------------- #
 LABEL "version"="1.0.0"
-LABEL "repository"="https://github.com/jefftriplett/python-actions"
-LABEL "homepage"="https://github.com/jefftriplett/python-actions"
-LABEL "maintainer"="Jeff Triplett <jeff.triplett@github.com>"
+LABEL "repository"="http://github.com/ivanklee86/xunit-slack-reporter"
+LABEL "homepage"="http://github.com/ivanklee86/xunit-slack-reporter"
+LABEL "maintainer"="Ivan Lee <ivanklee86@gmail.com>"
 
 LABEL "com.github.actions.name"="Intermediate build."
 LABEL "com.github.actions.description"="Wraps Python/Pipenv for Github Actions."

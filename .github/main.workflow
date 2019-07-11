@@ -5,7 +5,7 @@ workflow "CI" {
 
 action "Install dependencies" {
   uses = "./build_env"
-  runs = ["pipenv", "install"]
+  runs = ["pipenv", "install", "--dev"]
 
 }
 
