@@ -1,0 +1,28 @@
+
+# ====================================================================== #
+# xUnit Slack Reporter Docker Image
+# ====================================================================== #
+
+# Base image
+# ---------------------------------------------------------------------- #
+FROM python:3.7.3
+LABEL MAINTAINER="Ivan Lee"
+
+# Container settings
+# ---------------------------------------------------------------------- #
+
+# Image settings
+ENV LC_ALL C.UTF-8
+ENV LANG =C.UTF-8
+ENV PIPENV_VENV_IN_PROJECT true
+
+# Set up Python
+# ---------------------------------------------------------------------- #
+RUN export VENV_NAME=${VENV_DIR:=venv}
+RUN python -m venv "${GITHUB_WORKSPACE}/${VENV_NAME}"
+RUN source "${GITHUB_WORKSPACE}/${VENV_NAME}/bin/activate"
+RUN pip install pipenv
+
+# Start service
+# ---------------------------------------------------------------------- #
+CMD ["run.sh"]

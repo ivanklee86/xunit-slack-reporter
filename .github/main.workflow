@@ -1,27 +1,16 @@
 workflow "CI" {
   on = "pull_request"
-  resolves = ["test", "test2"]
+  resolves = "Run tests"
 }
 
-action "pipenv-sync" {
-  uses = "peaceiris/actions-pipenv@3.7"
-  args = ["sync"]
+action "Install dependencies" {
+  uses = "./Dockerfile-build.local"
+  runs = ["pipenv", "install"]
+
 }
 
-action "test" {
-  needs = "pipenv-sync"
-  uses = "peaceiris/actions-pipenv@3.7"
-  args = ["run", "pytest"]
-}
-
-action "test2" {
-  needs = "pipenv-sync"
-  uses = "peaceiris/actions-pipenv@3.7"
-  args = ["run", "test"]
-}
-
-action "test3" {
-  needs = "pipenv-sync"
-  uses = "peaceiris/actions-pipenv@3.7"
-  args = ["run", "pythob", "-m","pytest"]
+action "Run tests" {
+  needs = "Install dependencies"
+  uses = "./Dockerfile-build.local"
+  runs = ["pipenv", "run", "test"]
 }
