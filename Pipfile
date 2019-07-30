@@ -24,5 +24,8 @@ bumpversion = "*"
 junitparser = "*"
 slack = "*"
 
+[scripts]
+test = "python -m pytest"
+
 [requires]
 python_version = "3.7"
