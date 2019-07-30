@@ -16,7 +16,6 @@ build: build-dockerimage
 lint:
 	export PYTHONPATH=${ROOT_DIR}:$$PYTHONPATH;
 	mypy app;
-	flake8;
 	pylint app;
 
 pytest:

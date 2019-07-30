@@ -12,7 +12,8 @@ action "install" {
 action "tests" {
   needs = "install"
   uses = "./build_action"
-  runs = ["pipenv", "run", "test"]
+  runs = ["pipenv", "run", "test"],
+  secrets = ["SLACK_TOKEN"]
 }
 
 action "pylint" {
