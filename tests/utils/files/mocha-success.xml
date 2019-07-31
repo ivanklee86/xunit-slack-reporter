@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="0.02" tests="1" failures="0">
+  <testsuite name="Root Suite" timestamp="2019-07-31T13:11:37" tests="0" failures="0" time="0">
+  </testsuite>
+  <testsuite name="App" timestamp="2019-07-31T13:11:37" tests="0" file="/Users/ivanlee/repos/resume/test/test_status.js" failures="0" time="0">
+  </testsuite>
+  <testsuite name="/GET status" timestamp="2019-07-31T13:11:37" tests="1" file="/Users/ivanlee/repos/resume/test/test_status.js" failures="0" time="0.02">
+    <testcase name="App /GET status should return HTTP 200 error code from GET /status" time="0.02" classname="should return HTTP 200 error code from GET /status">
+    </testcase>
+  </testsuite>
+</testsuites>
