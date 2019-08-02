@@ -8,8 +8,8 @@
 FROM python:3.7.3
 LABEL MAINTAINER="Ivan Lee"
 
-LABEL "com.github.actions.name"="XUnit Slack Reporter"
-LABEL "com.github.actions.description"="Reports results of tests in XUnit to Slack channel."
+LABEL "com.github.actions.name"="xUnit Slack Reporter"
+LABEL "com.github.actions.description"="Reports results of tests in xUnit to Slack channel."
 LABEL "com.github.actions.icon"="mic"
 LABEL "com.github.actions.color"="purple"
 
