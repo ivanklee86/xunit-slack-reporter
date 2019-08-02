@@ -1,6 +1,6 @@
 workflow "CI" {
   on = "pull_request"
-  resolves = ["slack-action-complete"]
+  resolves = ["notify-workflow"]
 }
 
 action "install" {
@@ -18,6 +18,18 @@ action "tests" {
   secrets = ["SLACK_TOKEN"]
 }
 
+action "notify-tests" {
+  needs = "tests"
+  uses = "./"
+  env = {
+    SLACK_CHANNEL = "CKQ7C7KJN"
+    XUNIT_PATH = "./results.xml"
+    EXIT_CODE_FROM_REPORT = "True"
+  },
+  secrets = ["SLACK_TOKEN"]
+}
+
+
 action "pylint" {
   needs = "install"
   uses = "ivanklee86/python_pipenv_action@master"
@@ -30,9 +42,9 @@ action "mypy" {
   runs = ["pipenv", "run", "mypy", "app"]
 }
 
-action "slack-action-complete" {
+action "notify-workflow" {
   needs = [
-    "tests",
+    "notify-tests",
     "mypy",
     "pylint",
   ]
