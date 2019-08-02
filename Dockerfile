@@ -19,8 +19,8 @@ LABEL "maintainer"="Ivan Lee <ivanklee@gmail.com>"
 
 # Copy files into image
 # ---------------------------------------------------------------------- #
-COPY . /app
-WORKDIR /app
+COPY . /source
+WORKDIR /source
 
 # Install app
 # ---------------------------------------------------------------------- #
@@ -35,9 +35,9 @@ ENV LC_ALL C.UTF-8
 ENV LANG =C.UTF-8
 
 # Python variables
-ENV PYTHONPATH /app
+ENV PYTHONPATH /source
 
 
 # Run action
 # ---------------------------------------------------------------------- #
-ENTRYPOINT ["/app/entrypoint.sh"]
+ENTRYPOINT ["/source/entrypoint.sh"]

@@ -2,4 +2,4 @@
 
 set -eu
 
-python /app/script.py
+python /source/app/script.py
