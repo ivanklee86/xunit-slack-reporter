@@ -1,4 +1,4 @@
-APP_VERSION = '0.0.5'
+APP_VERSION = '0.0.6'
 
 
 # Script
