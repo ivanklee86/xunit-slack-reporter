@@ -7,15 +7,22 @@ import app.utils.slack_utils as slack_utils
 
 
 def main():
-    # Load XUnit report
+    # Check input values.
     if constants.XUNIT_PATH_ENV_VAR not in os.environ:
         raise Exception(f"xunit file not found!  Please make sure to set the {constants.XUNIT_PATH_ENV_VAR} env variable!")
-    else:
-        try:
-            xunit_path = os.getenv(constants.XUNIT_PATH_ENV_VAR)
-            xunit_report = xunit_utils.read_xunit(pathlib.Path(xunit_path))
-        except Exception as e:
-            raise Exception(f"Error loading xunit file!  Error: {e}")
+
+    if constants.SLACK_CHANNEL_ENV_VAR not in os.environ:
+        raise Exception(f"Slack channel!  Please make sure to set the {constants.SLACK_CHANNEL_ENV_VAR} env variable!")
+
+    if constants.SLACK_TOKEN_ENV_VAR not in os.environ:
+        raise Exception(f"Slack channel!  Please make sure to set the {constants.SLACK_TOKEN_ENV_VAR} env variable!")
+
+    # Load XUnit report
+    try:
+        xunit_path = os.getenv(constants.XUNIT_PATH_ENV_VAR)
+        xunit_report = xunit_utils.read_xunit(pathlib.Path(xunit_path))
+    except Exception as excep:
+        raise Exception(f"Error loading xunit file!  Error: {excep}")
 
     # Slack results
     slack_attachment = {
@@ -31,36 +38,31 @@ def main():
 
     slack_attachment['fields'].append({
         "title": "Total # of tests",
-        "value": f"{xunit_report.tests}",
-        "short": False
+        "value": f"{xunit_report.tests}"
     })
 
     slack_attachment['fields'].append({
         "title": "Tests passed:",
-        "value": f"{xunit_report.tests - xunit_report.errors - xunit_report.failures}",
-        "short": False
+        "value": f"{xunit_report.tests - xunit_report.errors - xunit_report.failures}"
     })
 
     slack_attachment['fields'].append({
         "title": "Tests errored:",
-        "value": f"{xunit_report.errors}",
-        "short": False
+        "value": f"{xunit_report.errors}"
     })
 
     slack_attachment['fields'].append({
         "title": "Tests failed:",
-        "value": f"{xunit_report.failures}",
-        "short": False
+        "value": f"{xunit_report.failures}"
     })
 
     slack_attachment['fields'].append({
         "title": "Time elapsed:",
-        "value": f"{xunit_report.time} seconds",
-        "short": False
+        "value": f"{xunit_report.time} seconds"
     })
 
     slack_utils.send_slack_msg(
-        os.getenv("SLACK_CHANNEL"),
+        os.getenv(constants.SLACK_CHANNEL_ENV_VAR),
         attachments=[slack_attachment]
     )
 
