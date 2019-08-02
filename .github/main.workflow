@@ -20,7 +20,7 @@ action "tests" {
 
 action "notify-tests" {
   needs = "tests"
-  uses = "~"
+  uses = "./"
   env = {
     SLACK_CHANNEL = "CKQ7C7KJN"
     XUNIT_PATH = "./results.xml"
