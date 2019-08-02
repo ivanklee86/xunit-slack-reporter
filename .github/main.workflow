@@ -12,7 +12,10 @@ action "install" {
 action "tests" {
   needs = "install"
   uses = "./build_action"
-  runs = ["pipenv", "run", "test"],
+  runs = ["pipenv", "run", "testci"],
+  env = {
+    SLACK_CHANNEL = "C5BMKV7EV"
+  },
   secrets = ["SLACK_TOKEN"]
 }
 

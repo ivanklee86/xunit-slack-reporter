@@ -27,6 +27,7 @@ slackclient = "*"
 
 [scripts]
 test = "python -m pytest"
+testci = "python -m pytest --junitxml=results.xml"
 
 [requires]
 python_version = "3.7"

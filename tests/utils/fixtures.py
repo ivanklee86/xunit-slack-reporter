@@ -1,6 +1,6 @@
 import pytest
 from dotenv import load_dotenv
-from tests.utils.xunit_files import PYTEST_SUCCESS, PYTEST_FAILURE, MOCHA_SUCCESS
+from tests.utils.xunit_files import PYTEST_SUCCESS_PATH, PYTEST_FAILURE_PATH, MOCHA_SUCCESS_PATH
 
 
 @pytest.fixture()
@@ -9,7 +9,7 @@ def test_provisioning():
 
 
 @pytest.fixture(
-    params=[PYTEST_FAILURE, PYTEST_SUCCESS, MOCHA_SUCCESS]
+    params=[PYTEST_FAILURE_PATH, PYTEST_SUCCESS_PATH, MOCHA_SUCCESS_PATH]
 )
 def xunit_file(request):
     yield request.param

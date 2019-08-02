@@ -1,5 +1,6 @@
 import os
 from slack import WebClient
+from app import constants
 
 
 def send_slack_msg(slack_channel: str,
@@ -13,7 +14,7 @@ def send_slack_msg(slack_channel: str,
     :param attachments: Attachments (if desired)
     :return:
     """
-    client = WebClient(os.getenv("SLACK_TOKEN", ""))
+    client = WebClient(os.getenv(constants.SLACK_TOKEN_ENV_VAR, ""))
 
     client.chat_postMessage(
         channel=slack_channel,
