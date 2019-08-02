@@ -40,4 +40,4 @@ ENV PYTHONPATH /app
 
 # Run action
 # ---------------------------------------------------------------------- #
-ENTRYPOINT ["entrypoint.sh"]
+ENTRYPOINT ["./entrypoint.sh"]
