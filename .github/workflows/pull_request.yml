@@ -1,10 +1,10 @@
 ---
 pipenvsetup: &pipenvsetup
   - name: Install dependencies.
-      uses: ivanklee86/python_pipenv_action@master
-      with:
-        entrypoint: pipenv
-        args: install --dev
+    uses: ivanklee86/python_pipenv_action@master
+    with:
+      entrypoint: pipenv
+      args: install --dev
 
 on: pull_request
 name: CI
