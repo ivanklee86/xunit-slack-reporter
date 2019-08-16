@@ -38,27 +38,32 @@ def main():
 
     slack_attachment['fields'].append({
         "title": "Total # of tests",
-        "value": f"{xunit_report.tests}"
+        "value": f"{xunit_report.tests}",
+        "short": True
     })
 
     slack_attachment['fields'].append({
         "title": "Tests passed:",
-        "value": f"{xunit_report.tests - xunit_report.errors - xunit_report.failures}"
+        "value": f"{xunit_report.tests - xunit_report.errors - xunit_report.failures}",
+        "short": True
     })
 
     slack_attachment['fields'].append({
         "title": "Tests errored:",
-        "value": f"{xunit_report.errors}"
+        "value": f"{xunit_report.errors}",
+        "short": True
     })
 
     slack_attachment['fields'].append({
         "title": "Tests failed:",
-        "value": f"{xunit_report.failures}"
+        "value": f"{xunit_report.failures}",
+        "short": True
     })
 
     slack_attachment['fields'].append({
         "title": "Time elapsed:",
-        "value": f"{xunit_report.time} seconds"
+        "value": f"{xunit_report.time} seconds",
+        "short": True
     })
 
     slack_utils.send_slack_msg(
@@ -70,6 +75,7 @@ def main():
     if os.getenv("EXIT_CODE_FROM_REPORT"):
         if xunit_report.errors or xunit_report.failures:
             sys.exit(1)
+
 
 if __name__ == "__main__":
     main()

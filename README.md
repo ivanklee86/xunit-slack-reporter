@@ -37,3 +37,13 @@ action "testsnotify" {
 }
 
 ```
+
+```.env
+    - name: notify-tests
+      uses: ./
+      env:
+        EXIT_CODE_FROM_REPORT: "True"
+        SLACK_CHANNEL: CKQ7C7KJN
+        SLACK_TOKEN: ${{ secrets.SLACK_TOKEN }}
+        XUNIT_PATH: ./results.xml
+```

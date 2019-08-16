@@ -1,0 +1,69 @@
+on: pull_request
+name: CI
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    - name: Install dependencies.
+      uses: ivanklee86/python_pipenv_action@master
+      with:
+        entrypoint: pipenv
+        args: install --dev
+    - name: Run tests
+      uses: ivanklee86/python_pipenv_action@master
+      env:
+        SLACK_CHANNEL: C5BMKV7EV
+        SLACK_TOKEN: ${{ secrets.SLACK_TOKEN }}
+      with:
+        entrypoint: pipenv
+        args: run testci
+    - name: Notify results
+      uses: ./
+      env:
+        EXIT_CODE_FROM_REPORT: "True"
+        SLACK_CHANNEL: CKQ7C7KJN
+        SLACK_TOKEN: ${{ secrets.SLACK_TOKEN }}
+        XUNIT_PATH: ./results.xml
+  pylint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - name: Install dependencies.
+        uses: ivanklee86/python_pipenv_action@master
+        with:
+          entrypoint: pipenv
+          args: install --dev
+      - name: Run pylint.
+        uses: ivanklee86/python_pipenv_action@master
+        with:
+          entrypoint: pipenv
+          args: run pylint app
+  mypy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - name: Install dependencies.
+        uses: ivanklee86/python_pipenv_action@master
+        with:
+          entrypoint: pipenv
+          args: install --dev
+      - name: Run mypy.
+        uses: ivanklee86/python_pipenv_action@master
+        with:
+          entrypoint: pipenv
+          args: run mypy app
+  notify:
+    runs-on: ubuntu-latest
+    needs: [test, pylint, mypy]
+    steps:
+      - uses: actions/checkout@master
+      - name: notify-workflow
+        uses: rtCamp/action-slack-notify@master
+        env:
+          SLACK_COLOR: '#3278BD'
+          SLACK_ICON: https://slack-files2.s3-us-west-2.amazonaws.com/avatars/2017-12-19/288981919427_f45f04edd92902a96859_512.png
+          SLACK_MESSAGE: ':rocket:'
+          SLACK_TITLE: CI pipeline completed
+          SLACK_USERNAME: Github
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
