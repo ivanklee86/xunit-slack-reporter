@@ -1,11 +1,3 @@
----
-pipenvsetup: &pipenvsetup
-  - name: Install dependencies.
-    uses: ivanklee86/python_pipenv_action@master
-    with:
-      entrypoint: pipenv
-      args: install --dev
-
 on: pull_request
 name: CI
 jobs:
@@ -13,7 +5,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@master
-    - *pipenvsetup
+    - name: Install dependencies.
+      uses: ivanklee86/python_pipenv_action@master
+      with:
+        entrypoint: pipenv
+        args: install --dev
     - name: Run tests
       uses: ivanklee86/python_pipenv_action@master
       env:
@@ -33,7 +29,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
-      - *pipenvsetup
+      - name: Install dependencies.
+        uses: ivanklee86/python_pipenv_action@master
+        with:
+          entrypoint: pipenv
+          args: install --dev
       - name: Run pylint.
         uses: ivanklee86/python_pipenv_action@master
         with:
@@ -43,7 +43,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
-      - *pipenvsetup
+      - name: Install dependencies.
+        uses: ivanklee86/python_pipenv_action@master
+        with:
+          entrypoint: pipenv
+          args: install --dev
       - name: Run mypy.
         uses: ivanklee86/python_pipenv_action@master
         with:
