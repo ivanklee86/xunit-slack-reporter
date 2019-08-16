@@ -35,10 +35,10 @@ jobs:
           entrypoint: pipenv
           args: install --dev
       - name: Run pylint.
-          uses: ivanklee86/python_pipenv_action@master
-          with:
-            entrypoint: pipenv
-            args: run pylint app
+        uses: ivanklee86/python_pipenv_action@master
+        with:
+          entrypoint: pipenv
+          args: run pylint app
   mypy:
     runs-on: ubuntu-latest
     steps:
