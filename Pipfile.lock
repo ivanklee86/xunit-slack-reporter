@@ -79,11 +79,11 @@
         },
         "junitparser": {
             "hashes": [
-                "sha256:8126dba3658c16e3687504d85325a852ac3866604d170247c351ed9ff355e74e",
-                "sha256:fdf20583f33c05eb1fe34d99a2bbd459b068fe87dc55d48dbad0205092bece07"
+                "sha256:10ea6c64cde22fb154dc78570d9ff6be2f3f3ab565e654a60da61c1790c7c1ca",
+                "sha256:8b682595874c897d7f0284277cee74633a6c66bfba1efa1d4d205e1480ada815"
             ],
             "index": "pypi",
-            "version": "==1.3.2"
+            "version": "==1.3.3"
         },
         "multidict": {
             "hashes": [
@@ -255,10 +255,10 @@
         },
         "execnet": {
             "hashes": [
-                "sha256:0dd40ad3b960aae93bdad7fe1c3f049bbcc8fba47094655a4301f5b33e906816",
-                "sha256:3839f3c1e9270926e7b3d9b0a52a57be89c302a3826a2b19c8d6e6c3d2b506d2"
+                "sha256:cacb9df31c9680ec5f95553976c4da484d407e85e41c83cb812aa014f0eddc50",
+                "sha256:d4efd397930c46415f62f8a31388d6be4f27a91d7550eb79bc64a756e0056547"
             ],
-            "version": "==1.7.0"
+            "version": "==1.7.1"
         },
         "flake8": {
             "hashes": [
