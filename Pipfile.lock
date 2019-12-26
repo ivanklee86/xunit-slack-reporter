@@ -69,11 +69,11 @@
         },
         "junitparser": {
             "hashes": [
-                "sha256:6bedb39d0dc396c3326e9c3888c3ddee3dcd4210938dabf3a106b2347656635f",
-                "sha256:951f76d6793dee907228ea8e513381a20c933fc55f1fe427c69533398c177e6a"
+                "sha256:6e67cf080235be7158ce3fe35fa9a327bf577080c02f5c646d4761e513bb2131",
+                "sha256:9d8cd9909f115d4e0fe1f445ebd816524123c34cf0178c48bd4778d50a5f2617"
             ],
             "index": "pypi",
-            "version": "==1.4.0"
+            "version": "==1.4.1"
         },
         "multidict": {
             "hashes": [
@@ -378,10 +378,10 @@
         },
         "pyparsing": {
             "hashes": [
-                "sha256:20f995ecd72f2a1f4bf6b072b63b22e2eb457836601e76d6e5dfcd75436acc1f",
-                "sha256:4ca62001be367f01bd3e92ecbb79070272a9d4964dce6a48a82ff0b8bc7e683a"
+                "sha256:4c830582a84fb022400b85429791bc551f1f4871c33f23e44f353119e92f969f",
+                "sha256:c342dccb5250c08d45fd6f8b4a559613ca603b57498511740e65cd11a2e7dcec"
             ],
-            "version": "==2.4.5"
+            "version": "==2.4.6"
         },
         "pytest": {
             "hashes": [
