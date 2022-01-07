@@ -24,7 +24,7 @@ WORKDIR /source
 
 # Install app
 # ---------------------------------------------------------------------- #
-RUN pip install poetry
+RUN pip install -U pip poetry
 RUN poetry config virtualenvs.create false
 RUN poetry install --no-dev 
 
