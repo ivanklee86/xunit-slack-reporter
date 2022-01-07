@@ -9,6 +9,7 @@ license = "MIT"
 python = "^3.10"
 junitparser = "^2.4.1"
 slackclient = "^2.9.3"
+requests = "^2.27.1"
 
 [tool.poetry.dev-dependencies]
 mypy = "^0.930"
