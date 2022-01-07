@@ -30,6 +30,8 @@ jobs:
         poetry run pytest --junitxml=results.xml
     - name: Notify results
       uses: ./
+      run: |
+        poetry run entrypoint.sh
       env:
         EXIT_CODE_FROM_REPORT: "True"
         SLACK_CHANNEL: CKQ7C7KJN
