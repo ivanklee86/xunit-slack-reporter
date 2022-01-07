@@ -5,7 +5,7 @@
 
 # Base image
 # ---------------------------------------------------------------------- #
-FROM python:3.7.3
+FROM python:3.10.1
 LABEL MAINTAINER="Ivan Lee"
 
 LABEL "com.github.actions.name"="xUnit Slack Reporter"
@@ -24,8 +24,8 @@ WORKDIR /source
 
 # Install app
 # ---------------------------------------------------------------------- #
-RUN pip install pipenv
-RUN pipenv install --system --deploy
+RUN pip install poetry
+RUN poetry install --no-dev 
 
 # Container settings
 # ---------------------------------------------------------------------- #
@@ -40,4 +40,4 @@ ENV PYTHONPATH /source
 
 # Run action
 # ---------------------------------------------------------------------- #
-ENTRYPOINT ["/source/entrypoint.sh"]
+ENTRYPOINT ["poetry", "run", "/source/entrypoint.sh"]

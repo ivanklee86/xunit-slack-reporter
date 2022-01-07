@@ -1,9 +1,9 @@
 import os
 import sys
 import pathlib
-import app.constants as constants
-import app.utils.xunit_utils as xunit_utils
-import app.utils.slack_utils as slack_utils
+from app import constants
+from app.utils import xunit_utils
+from app.utils import slack_utils
 
 
 def main():
@@ -18,11 +18,8 @@ def main():
         raise Exception(f"Slack channel!  Please make sure to set the {constants.SLACK_TOKEN_ENV_VAR} env variable!")
 
     # Load XUnit report
-    try:
-        xunit_path = os.getenv(constants.XUNIT_PATH_ENV_VAR)
-        xunit_report = xunit_utils.read_xunit(pathlib.Path(xunit_path))
-    except Exception as excep:
-        raise Exception(f"Error loading xunit file!  Error: {excep}")
+    xunit_path = os.getenv(constants.XUNIT_PATH_ENV_VAR)
+    xunit_report = xunit_utils.read_xunit(pathlib.Path(xunit_path))
 
     # Slack results
     slack_attachment = {
