@@ -25,7 +25,7 @@ WORKDIR /source
 # Install app
 # ---------------------------------------------------------------------- #
 RUN pip install -U pip poetry
-RUN poetry config virtualenvs.create false
+# RUN poetry config virtualenvs.create false
 RUN poetry install --no-dev 
 
 # Container settings
@@ -41,4 +41,4 @@ ENV PYTHONPATH /source
 
 # Run action
 # ---------------------------------------------------------------------- #
-ENTRYPOINT ["/source/entrypoint.sh"]
+ENTRYPOINT ["poetry", "run", "/source/entrypoint.sh"]
