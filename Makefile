@@ -15,12 +15,12 @@ build: build-dockerimage
 
 lint:
 	export PYTHONPATH=${ROOT_DIR}:$$PYTHONPATH;
-	mypy app;
+	mypy --install-types --non-interactive app;
 	pylint app;
 
 pytest:
 	export PYTHONPATH=${ROOT_DIR}:$$PYTHONPATH && \
-	py.test --cov app tests
+	py.test tests
 
 #-----------------------------------------------------------------------
 # Run Rules
@@ -37,7 +37,7 @@ run-docker:
 # Docker Rules
 #-----------------------------------------------------------------------
 # Build Docker image
-build-dockerimage:
+build-docker:
 	docker build -t ${PROJECT_NAME} .
 
 # Deletes Docker image

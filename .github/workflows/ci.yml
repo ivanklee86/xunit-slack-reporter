@@ -1,0 +1,63 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: Set up Python 3.10
+      uses: actions/setup-python@v1
+      with:
+        python-version: 3.10.1
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install poetry
+        poetry install
+    - name: Linting
+      run: |
+        poetry run mypy --install-types --non-interactive app
+        poetry run pylint app
+    - name: Run tests
+      env:
+        SLACK_CHANNEL: C5BMKV7EV
+        SLACK_TOKEN: ${{ secrets.SLACK_TOKEN }}
+      run: |
+        poetry run pytest
+    - name: "Upload coverage to Codecov"
+      uses: codecov/codecov-action@v2
+      with:
+        fail_ci_if_error: true
+        files: ./test_results/cov.xml
+        token: ${{ secrets.CODECOV_TOKEN }}
+    - uses: actions/upload-artifact@v2
+      with:
+        name: test-results
+        path: test_results
+    - name: Integration test glob notifications
+      uses: ./
+      env:
+        ONLY_NOTIFY_ON_ISSUES: "True"
+        SLACK_CHANNEL: C5BMKV7EV
+        SLACK_TOKEN: ${{ secrets.SLACK_TOKEN }}
+        XUNIT_GLOB: "tests/**/*.xml"
+    - name: Integration test path notifications
+      uses: ./
+      env:
+        EXIT_CODE_FROM_REPORT: "True"
+        SLACK_CHANNEL: C5BMKV7EV
+        SLACK_TOKEN: ${{ secrets.SLACK_TOKEN }}
+        XUNIT_PATH: ./test_results/results.xml
+    - name: notify-workflow
+      uses: rtCamp/action-slack-notify@master
+      env:
+        SLACK_COLOR: '#3278BD'
+        SLACK_ICON: https://slack-files2.s3-us-west-2.amazonaws.com/avatars/2017-12-19/288981919427_f45f04edd92902a96859_512.png
+        SLACK_MESSAGE: ':rocket:'
+        SLACK_TITLE: CI pipeline completed
+        SLACK_USERNAME: Github
+        SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}

@@ -15,7 +15,7 @@ def test_main_pytestsuccess(monkeypatch, test_provisioning, mocker):  # noqa: F8
     assert slack_mock.called
     assert slack_mock.call_count == 1
     assert slack_mock.call_args[1]['attachments'][0]['color'] == constants.PASS_COLOR
-    assert len(slack_mock.call_args[1]['attachments'][0]['fields']) == 5
+    assert len(slack_mock.call_args[1]['attachments'][0]['fields']) > 0
 
 
 def test_main_pytestfailure(monkeypatch, test_provisioning, mocker):  # noqa: F811
@@ -29,7 +29,7 @@ def test_main_pytestfailure(monkeypatch, test_provisioning, mocker):  # noqa: F8
     assert slack_mock.called
     assert slack_mock.call_count == 1
     assert slack_mock.call_args[1]['attachments'][0]['color'] == constants.FAIL_COLOR
-    assert len(slack_mock.call_args[1]['attachments'][0]['fields']) == 5
+    assert len(slack_mock.call_args[1]['attachments'][0]['fields']) > 0
 
 
 def test_main_mochasuccess(monkeypatch, test_provisioning, mocker):  # noqa: F811
@@ -44,7 +44,7 @@ def test_main_mochasuccess(monkeypatch, test_provisioning, mocker):  # noqa: F81
     assert slack_mock.called
     assert slack_mock.call_count == 1
     assert slack_mock.call_args[1]['attachments'][0]['color'] == constants.PASS_COLOR
-    assert len(slack_mock.call_args[1]['attachments'][0]['fields']) == 5
+    assert len(slack_mock.call_args[1]['attachments'][0]['fields']) > 0
 
 
 def test_main_systemexit_failure(monkeypatch, test_provisioning, mocker):  # noqa: F811
@@ -60,6 +60,26 @@ def test_main_systemexit_failure(monkeypatch, test_provisioning, mocker):  # noq
     assert slack_mock.called
     assert slack_mock.call_count == 1
     assert slack_mock.call_args[1]['attachments'][0]['color'] == constants.FAIL_COLOR
-    assert len(slack_mock.call_args[1]['attachments'][0]['fields']) == 5
+    assert len(slack_mock.call_args[1]['attachments'][0]['fields']) > 0
+    assert pytest_wrapped_e.type == SystemExit
+    assert pytest_wrapped_e.value.code == 1
+
+
+def test_main_glob(monkeypatch, test_provisioning, mocker):  # noqa: F811
+    monkeypatch.setenv("XUNIT_GLOB", "**/*.xml")
+    monkeypatch.setenv("GITHUB_WORKFLOW", "Unit Test")
+    monkeypatch.setenv("GITHUB_WORKSPACE", xunit_files.GITHUB_WORKSPACE)
+    monkeypatch.setenv("GITHUB_REF", "Unit Test")
+    monkeypatch.setenv("EXIT_CODE_FROM_REPORT", "True")
+    monkeypatch.setenv("ONLY_NOTIFY_ON_ISSUES", "True")
+    slack_mock = mocker.patch("app.utils.slack_utils.send_slack_msg")
+
+    with pytest.raises(SystemExit) as pytest_wrapped_e:
+        script.main()
+
+    assert slack_mock.called
+    assert slack_mock.call_count == 1
+    assert slack_mock.call_args[1]['attachments'][0]['color'] == constants.FAIL_COLOR
+    assert len(slack_mock.call_args[1]['attachments'][0]['fields']) > 0
     assert pytest_wrapped_e.type == SystemExit
     assert pytest_wrapped_e.value.code == 1

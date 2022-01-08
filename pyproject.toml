@@ -1,0 +1,51 @@
+[tool.poetry]
+name = "xunit-slack-reporter"
+version = "1.1.0"
+description = "Github Action to send xUnit results to Slack."
+authors = ["Ivan Lee <ivanklee86@gmail.com>"]
+license = "MIT"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+junitparser = "^2.4.1"
+slackclient = "^2.9.3"
+requests = "^2.27.1"
+
+[tool.poetry.dev-dependencies]
+mypy = "^0.930"
+pylint = "^2.12.2"
+pytest = "^6.2.5"
+pytest-cov = "^3.0.0"
+pytest-flake8 = "^1.0.7"
+pytest-html = "^3.1.1"
+coveralls = "^3.3.1"
+pytest-dotenv = "^0.5.2"
+pytest-mock = "^3.6.1"
+bump2version = "^1.0.1"
+
+[tool.mypy]
+strict_optional = false
+
+[tool.pytest.ini_options]
+addopts= """
+    --cov app \
+    --cov-report term \
+    --cov-report html:test_results/cov_html \
+    --cov-report xml:test_results/cov.xml \
+    --html=test_results/results.html \
+    --self-contained-html \
+    --junitxml=test_results/results.xml \
+    --disable-warnings
+"""
+log_file_level="ERROR"
+
+[tool.pylint.messages_control]
+disable = [
+    "line-too-long",
+    "missing-module-docstring",
+    "missing-function-docstring"
+]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

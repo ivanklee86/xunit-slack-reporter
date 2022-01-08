@@ -1,15 +1,15 @@
 import os
 import sys
 import pathlib
-import app.constants as constants
-import app.utils.xunit_utils as xunit_utils
-import app.utils.slack_utils as slack_utils
+from app import constants
+from app.utils import xunit_utils
+from app.utils import slack_utils
 
 
 def main():
     # Check input values.
-    if constants.XUNIT_PATH_ENV_VAR not in os.environ:
-        raise Exception(f"xunit file not found!  Please make sure to set the {constants.XUNIT_PATH_ENV_VAR} env variable!")
+    if constants.XUNIT_PATH_ENV_VAR not in os.environ and constants.XUNIT_PATH_GLOB_ENV_VAR not in os.environ:
+        raise Exception(f"xunit file(s) not found!  Please make sure to set the {constants.XUNIT_PATH_ENV_VAR} or {constants.XUNIT_PATH_GLOB_ENV_VAR} env variable!")
 
     if constants.SLACK_CHANNEL_ENV_VAR not in os.environ:
         raise Exception(f"Slack channel!  Please make sure to set the {constants.SLACK_CHANNEL_ENV_VAR} env variable!")
@@ -17,65 +17,93 @@ def main():
     if constants.SLACK_TOKEN_ENV_VAR not in os.environ:
         raise Exception(f"Slack channel!  Please make sure to set the {constants.SLACK_TOKEN_ENV_VAR} env variable!")
 
-    # Load XUnit report
-    try:
-        xunit_path = os.getenv(constants.XUNIT_PATH_ENV_VAR)
-        xunit_report = xunit_utils.read_xunit(pathlib.Path(xunit_path))
-    except Exception as excep:
-        raise Exception(f"Error loading xunit file!  Error: {excep}")
+    # Load configs
+    only_notify_on_issues = os.getenv(constants.ONLY_NOTIFY_ON_ISSUES_ENV_VAR, "false").lower() == 'true'
+    exit_on_failure = os.getenv(constants.EXIT_ON_FAILURE_ENV_VAR, "false").lower() == 'true'
 
-    # Slack results
-    slack_attachment = {
-        "color": constants.PASS_COLOR,
-        "author_name": "XUnit Slack Reporter",
-        "author_link": "https://github.com/ivanklee86/xunit-slack-reporter",
-        "title": f"XUnit test results for {os.getenv('GITHUB_WORKFLOW')} on {os.getenv('GITHUB_REF')}",
-        "fields": []
-    }
+    # Load XUnit report(s)
+    xunit_path = os.getenv(constants.XUNIT_PATH_ENV_VAR, "")
+    xunit_glob = os.getenv(constants.XUNIT_PATH_GLOB_ENV_VAR, "")
 
-    if xunit_report.errors or xunit_report.failures:
-        slack_attachment['color'] = constants.FAIL_COLOR
+    if xunit_glob:
+        working_dir = pathlib.Path(os.getenv('GITHUB_WORKSPACE'))
+        files = working_dir.glob(xunit_glob)
+    elif xunit_path:
+        files = [pathlib.Path(xunit_path)]
 
-    slack_attachment['fields'].append({
-        "title": "Total # of tests",
-        "value": f"{xunit_report.tests}",
-        "short": True
-    })
+    # Report on files
+    failed_tests = False
 
-    slack_attachment['fields'].append({
-        "title": "Tests passed:",
-        "value": f"{xunit_report.tests - xunit_report.errors - xunit_report.failures}",
-        "short": True
-    })
+    for file in files:
+        xunit_report = xunit_utils.read_xunit(file)
+        file_contains_failures = bool(xunit_report.errors or xunit_report.failures)
 
-    slack_attachment['fields'].append({
-        "title": "Tests errored:",
-        "value": f"{xunit_report.errors}",
-        "short": True
-    })
+        # Slack results
+        slack_attachment = {
+            "color": constants.PASS_COLOR,
+            "author_name": "XUnit Slack Reporter",
+            "author_link": "https://github.com/ivanklee86/xunit-slack-reporter",
+            "title": f"XUnit test results for {os.getenv('GITHUB_WORKFLOW')} on {os.getenv('GITHUB_REF')}",
+            "fields": []
+        }
 
-    slack_attachment['fields'].append({
-        "title": "Tests failed:",
-        "value": f"{xunit_report.failures}",
-        "short": True
-    })
+        if file_contains_failures:
+            slack_attachment['color'] = constants.FAIL_COLOR
 
-    slack_attachment['fields'].append({
-        "title": "Time elapsed:",
-        "value": f"{xunit_report.time} seconds",
-        "short": True
-    })
+        slack_attachment['fields'].append({
+            "title": "Total # of tests",
+            "value": f"{xunit_report.tests}",
+            "short": True
+        })
 
-    slack_utils.send_slack_msg(
-        os.getenv(constants.SLACK_CHANNEL_ENV_VAR),
-        attachments=[slack_attachment]
-    )
+        slack_attachment['fields'].append({
+            "title": "Tests passed",
+            "value": f"{xunit_report.tests - xunit_report.errors - xunit_report.failures}",
+            "short": True
+        })
+
+        slack_attachment['fields'].append({
+            "title": "Tests errored",
+            "value": f"{xunit_report.errors}",
+            "short": True
+        })
+
+        slack_attachment['fields'].append({
+            "title": "Tests failed",
+            "value": f"{xunit_report.failures}",
+            "short": True
+        })
+
+        slack_attachment['fields'].append({
+            "title": "Time elapsed",
+            "value": f"{xunit_report.time} seconds",
+            "short": True
+        })
+
+        slack_attachment['fields'].append({
+            "title": "File",
+            "value": str(file)
+        })
+
+        # If success, only send if configured.
+        if not file_contains_failures:
+            if not only_notify_on_issues:
+                slack_utils.send_slack_msg(
+                    os.getenv(constants.SLACK_CHANNEL_ENV_VAR),
+                    attachments=[slack_attachment]
+                )
+        # If error or failure.
+        else:
+            slack_utils.send_slack_msg(
+                    os.getenv(constants.SLACK_CHANNEL_ENV_VAR),
+                    attachments=[slack_attachment]
+            )
+            failed_tests = True
 
     # Return appropriate status code.
-    if os.getenv("EXIT_CODE_FROM_REPORT"):
-        if xunit_report.errors or xunit_report.failures:
+    if exit_on_failure:
+        if failed_tests:
             sys.exit(1)
-
 
 if __name__ == "__main__":
     main()
