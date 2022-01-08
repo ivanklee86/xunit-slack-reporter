@@ -15,7 +15,7 @@ def test_main_pytestsuccess(monkeypatch, test_provisioning, mocker):  # noqa: F8
     assert slack_mock.called
     assert slack_mock.call_count == 1
     assert slack_mock.call_args[1]['attachments'][0]['color'] == constants.PASS_COLOR
-    assert len(slack_mock.call_args[1]['attachments'][0]['fields']) == 5
+    assert len(slack_mock.call_args[1]['attachments'][0]['fields']) > 0
 
 
 def test_main_pytestfailure(monkeypatch, test_provisioning, mocker):  # noqa: F811
@@ -29,7 +29,7 @@ def test_main_pytestfailure(monkeypatch, test_provisioning, mocker):  # noqa: F8
     assert slack_mock.called
     assert slack_mock.call_count == 1
     assert slack_mock.call_args[1]['attachments'][0]['color'] == constants.FAIL_COLOR
-    assert len(slack_mock.call_args[1]['attachments'][0]['fields']) == 5
+    assert len(slack_mock.call_args[1]['attachments'][0]['fields']) > 0
 
 
 def test_main_mochasuccess(monkeypatch, test_provisioning, mocker):  # noqa: F811
@@ -44,7 +44,7 @@ def test_main_mochasuccess(monkeypatch, test_provisioning, mocker):  # noqa: F81
     assert slack_mock.called
     assert slack_mock.call_count == 1
     assert slack_mock.call_args[1]['attachments'][0]['color'] == constants.PASS_COLOR
-    assert len(slack_mock.call_args[1]['attachments'][0]['fields']) == 5
+    assert len(slack_mock.call_args[1]['attachments'][0]['fields']) > 0
 
 
 def test_main_systemexit_failure(monkeypatch, test_provisioning, mocker):  # noqa: F811
@@ -60,7 +60,7 @@ def test_main_systemexit_failure(monkeypatch, test_provisioning, mocker):  # noq
     assert slack_mock.called
     assert slack_mock.call_count == 1
     assert slack_mock.call_args[1]['attachments'][0]['color'] == constants.FAIL_COLOR
-    assert len(slack_mock.call_args[1]['attachments'][0]['fields']) == 5
+    assert len(slack_mock.call_args[1]['attachments'][0]['fields']) > 0
     assert pytest_wrapped_e.type == SystemExit
     assert pytest_wrapped_e.value.code == 1
 
@@ -80,6 +80,6 @@ def test_main_glob(monkeypatch, test_provisioning, mocker):  # noqa: F811
     assert slack_mock.called
     assert slack_mock.call_count == 1
     assert slack_mock.call_args[1]['attachments'][0]['color'] == constants.FAIL_COLOR
-    assert len(slack_mock.call_args[1]['attachments'][0]['fields']) == 5
+    assert len(slack_mock.call_args[1]['attachments'][0]['fields']) > 0
     assert pytest_wrapped_e.type == SystemExit
     assert pytest_wrapped_e.value.code == 1
