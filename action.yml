@@ -1,0 +1,11 @@
+name: 'xUnit Slack Reporter'
+description: 'Reports results of tests in xUnit to Slack channel.'
+author: Ivan Lee
+inputs: {}
+outputs: {}
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+branding:
+  icon: 'mic'
+  color: 'purple'
