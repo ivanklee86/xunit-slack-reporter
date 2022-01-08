@@ -21,6 +21,7 @@ pytest-html = "^3.1.1"
 coveralls = "^3.3.1"
 pytest-dotenv = "^0.5.2"
 pytest-mock = "^3.6.1"
+bump2version = "^1.0.1"
 
 [tool.mypy]
 strict_optional = false

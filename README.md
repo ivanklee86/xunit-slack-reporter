@@ -1,6 +1,6 @@
 # xUnit Slack Reporter
 
-[![GitHub Marketplace](https://img.shields.io/badge/Marketplace-v1-undefined.svg?logo=github&logoColor=white&style=flat)](https://github.com/marketplace/actions/xunit-slack-reporter)[![CI](https://github.com/ivanklee86/xunit-slack-reporter/actions/workflows/ci.yml/badge.svg)](https://github.com/ivanklee86/xunit-slack-reporter/actions/workflows/ci.yml)[![codecov](https://codecov.io/gh/ivanklee86/xunit-slack-reporter/branch/main/graph/badge.svg?token=PDSK5ZWPKJ)](https://codecov.io/gh/ivanklee86/xunit-slack-reporter)
+[![GitHub Marketplace](https://img.shields.io/badge/Marketplace-v1.0.0-undefined.svg?logo=github&logoColor=white&style=flat)](https://github.com/marketplace/actions/xunit-slack-reporter)[![CI](https://github.com/ivanklee86/xunit-slack-reporter/actions/workflows/ci.yml/badge.svg)](https://github.com/ivanklee86/xunit-slack-reporter/actions/workflows/ci.yml)[![codecov](https://codecov.io/gh/ivanklee86/xunit-slack-reporter/branch/main/graph/badge.svg?token=PDSK5ZWPKJ)](https://codecov.io/gh/ivanklee86/xunit-slack-reporter)
 
 Github Action to send xUnit results to Slack.
 
@@ -9,6 +9,8 @@ Github Action to send xUnit results to Slack.
 This action will:
 - Parse a xUnit-style XML report.
 - Send summary to Slack workspace & channel of your choice.
+- Supports paths and globs (i.e. `**/*.xml`)!
+- (Optional) Only send notifications if errors or failures are found.
 - (Optional) Fail the build if errors or failures are found.
 
 ## What you need!
