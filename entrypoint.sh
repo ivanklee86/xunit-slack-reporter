@@ -2,4 +2,4 @@
 
 set -eu
 
-poetry /source/app/script.py
+poetry run /source/app/script.py
