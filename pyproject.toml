@@ -12,7 +12,7 @@ slackclient = "^2.9.3"
 requests = "^2.27.1"
 
 [tool.poetry.dev-dependencies]
-mypy = "^0.930"
+mypy = "^0.931"
 pylint = "^2.12.2"
 pytest = "^6.2.5"
 pytest-cov = "^3.0.0"
