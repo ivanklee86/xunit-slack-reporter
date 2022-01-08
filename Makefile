@@ -20,7 +20,7 @@ lint:
 
 pytest:
 	export PYTHONPATH=${ROOT_DIR}:$$PYTHONPATH && \
-	py.test --cov app tests
+	py.test tests
 
 #-----------------------------------------------------------------------
 # Run Rules
