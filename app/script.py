@@ -42,7 +42,7 @@ def main():
         slack_attachment = {
             "color": constants.PASS_COLOR,
             "author_name": "XUnit Slack Reporter",
-            "author_link": "https://github.com/ivanklee86/xunit-slack-reporter",
+            "author_link": f"https://github.com/{os.getenv('GITHUB_REPOSITORY')}/actions/runs/{os.getenv('GITHUB_RUN_ID')}",
             "title": f"XUnit test results for {os.getenv('GITHUB_WORKFLOW')} on {os.getenv('GITHUB_REF')}",
             "fields": []
         }
