@@ -1,6 +1,6 @@
 # xUnit Slack Reporter
 
-[![GitHub Marketplace](https://img.shields.io/badge/Marketplace-v1.3.0-undefined.svg?logo=github&logoColor=white&style=flat)](https://github.com/marketplace/actions/xunit-slack-reporter)[![CI](https://github.com/ivanklee86/xunit-slack-reporter/actions/workflows/ci.yml/badge.svg)](https://github.com/ivanklee86/xunit-slack-reporter/actions/workflows/ci.yml)[![codecov](https://codecov.io/gh/ivanklee86/xunit-slack-reporter/branch/main/graph/badge.svg?token=PDSK5ZWPKJ)](https://codecov.io/gh/ivanklee86/xunit-slack-reporter)
+[![GitHub Marketplace](https://img.shields.io/badge/Marketplace-v1.4.0-undefined.svg?logo=github&logoColor=white&style=flat)](https://github.com/marketplace/actions/xunit-slack-reporter)[![CI](https://github.com/ivanklee86/xunit-slack-reporter/actions/workflows/ci.yml/badge.svg)](https://github.com/ivanklee86/xunit-slack-reporter/actions/workflows/ci.yml)[![codecov](https://codecov.io/gh/ivanklee86/xunit-slack-reporter/branch/main/graph/badge.svg?token=PDSK5ZWPKJ)](https://codecov.io/gh/ivanklee86/xunit-slack-reporter)
 
 Github Action to send xUnit results to Slack.
 
@@ -34,7 +34,7 @@ ONLY_NOTIFY_ON_ISSUES | True/False | If present, will only send notifications if
 Sample Workflow section:
 ```.env
     - name: notify-tests
-      uses: ivanklee86/xunit-slack-reporter@v1.3.0
+      uses: ivanklee86/xunit-slack-reporter@v1.4.0
       env:
         EXIT_CODE_FROM_REPORT: "True"
         SLACK_CHANNEL: CKQ7C7KJN
@@ -44,7 +44,7 @@ Sample Workflow section:
 
 ```.env
     - name: notify-tests
-      uses: ivanklee86/xunit-slack-reporter@v1.3.0
+      uses: ivanklee86/xunit-slack-reporter@v1.4.0
       env:
         ONLY_NOTIFY_ON_ISSUES: "True"
         SLACK_CHANNEL: CKQ7C7KJN
