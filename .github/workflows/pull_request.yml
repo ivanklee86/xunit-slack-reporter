@@ -31,7 +31,7 @@ jobs:
     - uses: actions/upload-artifact@v2
       with:
         name: my-artifact
-        path: ./results.html
+        path: ./result.html
     - name: Notify results
       uses: ./
       env:
