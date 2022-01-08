@@ -30,12 +30,12 @@ jobs:
         poetry run pytest
     - uses: actions/upload-artifact@v2
       with:
-        name: my-artifact
+        name: test-report
         path: ./results.html
     - name: Integration test glob notifications
       uses: ./
       env:
-        ONLY_NOTIFY_ON_FAILURE: "True"
+        ONLY_NOTIFY_ON_ISSUES: "True"
         SLACK_CHANNEL: C5BMKV7EV
         SLACK_TOKEN: ${{ secrets.SLACK_TOKEN }}
         XUNIT_GLOB: "tests/**/*.xml"
