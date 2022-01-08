@@ -5,7 +5,7 @@ from tests.utils.fixtures import test_provisioning  # noqa: 401
 
 
 def test_main_pytestsuccess(monkeypatch, test_provisioning, mocker):  # noqa: F811
-    monkeypatch.setenv("XUNIT_PATH", ".../mocha-success.xml")
+    monkeypatch.setenv("XUNIT_PATH", xunit_files.PYTEST_SUCCESS_FILE)
     monkeypatch.setenv("GITHUB_WORKFLOW", "Unit Test")
     monkeypatch.setenv("GITHUB_REF", "Unit Test")
     slack_mock = mocker.patch("app.utils.slack_utils.send_slack_msg")
