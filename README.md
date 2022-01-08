@@ -1,5 +1,7 @@
 # xUnit Slack Reporter
 
+[![CI](https://github.com/ivanklee86/xunit-slack-reporter/actions/workflows/ci.yml/badge.svg)](https://github.com/ivanklee86/xunit-slack-reporter/actions/workflows/ci.yml)
+
 Github Action to send xUnit results to Slack.
 
 ## What it does!
