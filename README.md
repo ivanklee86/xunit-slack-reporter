@@ -1,6 +1,6 @@
 # xUnit Slack Reporter
 
-[![GitHub Marketplace](https://img.shields.io/badge/Marketplace-v1.1.0-undefined.svg?logo=github&logoColor=white&style=flat)](https://github.com/marketplace/actions/xunit-slack-reporter)[![CI](https://github.com/ivanklee86/xunit-slack-reporter/actions/workflows/ci.yml/badge.svg)](https://github.com/ivanklee86/xunit-slack-reporter/actions/workflows/ci.yml)[![codecov](https://codecov.io/gh/ivanklee86/xunit-slack-reporter/branch/main/graph/badge.svg?token=PDSK5ZWPKJ)](https://codecov.io/gh/ivanklee86/xunit-slack-reporter)
+[![GitHub Marketplace](https://img.shields.io/badge/Marketplace-v1.2.0-undefined.svg?logo=github&logoColor=white&style=flat)](https://github.com/marketplace/actions/xunit-slack-reporter)[![CI](https://github.com/ivanklee86/xunit-slack-reporter/actions/workflows/ci.yml/badge.svg)](https://github.com/ivanklee86/xunit-slack-reporter/actions/workflows/ci.yml)[![codecov](https://codecov.io/gh/ivanklee86/xunit-slack-reporter/branch/main/graph/badge.svg?token=PDSK5ZWPKJ)](https://codecov.io/gh/ivanklee86/xunit-slack-reporter)
 
 Github Action to send xUnit results to Slack.
 
