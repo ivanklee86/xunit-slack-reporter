@@ -82,7 +82,7 @@ def main():
 
         slack_attachment['fields'].append({
             "title": "File",
-            "value": file
+            "value": str(file)
         })
 
         # If success, only send if configured.
