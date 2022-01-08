@@ -35,8 +35,8 @@ jobs:
         token: ${{ secrets.CODECOV_TOKEN }}
     - uses: actions/upload-artifact@v2
       with:
-        name: test-report
-        path: ./results.html
+        name: test-results
+        path: test_results
     - name: Integration test glob notifications
       uses: ./
       env:
@@ -50,7 +50,7 @@ jobs:
         EXIT_CODE_FROM_REPORT: "True"
         SLACK_CHANNEL: C5BMKV7EV
         SLACK_TOKEN: ${{ secrets.SLACK_TOKEN }}
-        XUNIT_PATH: ./results.xml
+        XUNIT_PATH: ./test_results/results.xml
     - name: notify-workflow
       uses: rtCamp/action-slack-notify@master
       env:

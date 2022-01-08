@@ -26,7 +26,15 @@ pytest-mock = "^3.6.1"
 strict_optional = false
 
 [tool.pytest.ini_options]
-addopts= "--html=results.html --self-contained-html --junitxml=results.xml --disable-warnings"
+addopts= """
+    --cov-report term \
+    --cov-report html:test_results/cov_html \
+    --cov-report xml:test_results/cov.xml \
+    --html=test_results/results.html \
+    --self-contained-html \
+    --junitxml=test_results/results.xml \
+    --disable-warnings
+"""
 log_file_level="ERROR"
 
 [tool.pylint.messages_control]
