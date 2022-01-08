@@ -34,7 +34,7 @@ ONLY_NOTIFY_ON_ISSUES | True/False | If present, will only send notifications if
 Sample Workflow section:
 ```.env
     - name: notify-tests
-      uses: ./
+      uses: ivanklee86/xunit-slack-reporter@v1.3.0
       env:
         EXIT_CODE_FROM_REPORT: "True"
         SLACK_CHANNEL: CKQ7C7KJN
@@ -44,7 +44,7 @@ Sample Workflow section:
 
 ```.env
     - name: notify-tests
-      uses: ./
+      uses: ivanklee86/xunit-slack-reporter@v1.3.0
       env:
         ONLY_NOTIFY_ON_ISSUES: "True"
         SLACK_CHANNEL: CKQ7C7KJN
