@@ -37,7 +37,7 @@ run-docker:
 # Docker Rules
 #-----------------------------------------------------------------------
 # Build Docker image
-build-dockerimage:
+build-docker:
 	docker build -t ${PROJECT_NAME} .
 
 # Deletes Docker image
