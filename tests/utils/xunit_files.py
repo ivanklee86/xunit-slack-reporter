@@ -3,6 +3,8 @@ from pathlib import Path
 
 local_dir = Path(__file__).parent.absolute()
 
+GITHUB_WORKSPACE = local_dir
+
 PYTEST_SUCCESS_FILE = os.path.join(local_dir, "files", "pytest-success.xml")
 PYTEST_FAILURE_FILE = os.path.join(local_dir, "files", "pytest-failure.xml")
 MOCHA_SUCCESS_FILE = os.path.join(local_dir, "files", "mocha-success.xml")

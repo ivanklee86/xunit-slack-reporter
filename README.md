@@ -16,28 +16,18 @@ This action will:
 ## Setting up the action
 The following environment variables are supported:
 
-Environment Variable | Description | Required? |
----------------------|-------------|-----------|
-XUNIT_PATH | Path (relative to workspce directory) to xUnit report | Y |
-SLACK_TOKEN | Slack bot user token | Y |
-SLACK_CHANNEL | Unique ID of slack channel to notify | Y |
-EXIT_CODE_FROM_REPORT | If present, will fail workflow if errors or failures are in the report | N |
+Environment Variable | Example | Description | Required? |
+---------------------|---------|-------------|-----------|
+XUNIT_PATH | ./results.xml | Path (relative to workspce directory) to xUnit report | Y* |
+XUNIT_GLOB | **/*.xml | Glob (relative to workspace directory) to xUnit reports | Y* |
+SLACK_TOKEN | (See Slack documentation) | Slack bot user token | Y |
+SLACK_CHANNEL | CKQ7C7KJN | Unique ID of slack channel to notify | Y |
+EXIT_CODE_FROM_REPORT | True/False | If present, will fail workflow if errors or failures are in the report | N |
+ONLY_NOTIFY_ON_FAILURE | True/False | If present, will only send notifications if errors or failures are found | N |
+
+\* = Either XUNIT_PATH or XUNIT_GLOB must be provided.
 
 Sample Workflow section:
-```
-action "testsnotify" {
-  needs = "tests"
-  uses = "ivanklee86/xunit-slack-reporter@master"
-  env = {
-    SLACK_CHANNEL = "AAAAAAAA"
-    XUNIT_PATH = "./results.xml"
-    EXIT_CODE_FROM_REPORT = "True"
-  },
-  secrets = ["SLACK_TOKEN"]
-}
-
-```
-
 ```.env
     - name: notify-tests
       uses: ./
@@ -46,4 +36,14 @@ action "testsnotify" {
         SLACK_CHANNEL: CKQ7C7KJN
         SLACK_TOKEN: ${{ secrets.SLACK_TOKEN }}
         XUNIT_PATH: ./results.xml
+```
+
+```.env
+    - name: notify-tests
+      uses: ./
+      env:
+        ONLY_NOTIFY_ON_ISSUES: "True"
+        SLACK_CHANNEL: CKQ7C7KJN
+        SLACK_TOKEN: ${{ secrets.SLACK_TOKEN }}
+        XUNIT_PATH: **/*.xml
 ```

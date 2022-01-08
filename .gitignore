@@ -106,3 +106,4 @@ site
 *.csv
 data
 config.py
+report.html
