@@ -26,7 +26,7 @@ pytest-mock = "^3.6.1"
 strict_optional = false
 
 [tool.pytest.ini_options]
-addopts= "--html=report.html --self-contained-html --junitxml=results.xml --disable-warnings"
+addopts= "--html=results.html --self-contained-html --junitxml=results.xml --disable-warnings"
 log_file_level="ERROR"
 
 [tool.pylint.messages_control]

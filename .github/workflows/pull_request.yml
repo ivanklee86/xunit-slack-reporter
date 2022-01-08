@@ -31,11 +31,11 @@ jobs:
     - uses: actions/upload-artifact@v2
       with:
         name: my-artifact
-        path: ./result.html
+        path: ./results.html
     - name: Integration test glob notifications
       uses: ./
       env:
-        EXIT_CODE_FROM_REPORT: "True"
+        ONLY_NOTIFY_ON_FAILURE: "True"
         SLACK_CHANNEL: C5BMKV7EV
         SLACK_TOKEN: ${{ secrets.SLACK_TOKEN }}
         XUNIT_GLOB: "tests/**/*.xml"
