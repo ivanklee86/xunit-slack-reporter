@@ -15,7 +15,7 @@ build: build-dockerimage
 
 lint:
 	export PYTHONPATH=${ROOT_DIR}:$$PYTHONPATH;
-	mypy app;
+	mypy --install-types --non-interactive app;
 	pylint app;
 
 pytest:

@@ -1,5 +1,5 @@
 from pathlib import Path
-from junitparser import JUnitXml
+from junitparser import JUnitXml  # type: ignore
 
 
 def read_xunit(xunit_report_path: Path):
