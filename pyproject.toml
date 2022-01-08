@@ -22,6 +22,19 @@ coveralls = "^3.3.1"
 pytest-dotenv = "^0.5.2"
 pytest-mock = "^3.6.1"
 
+[tool.mypy]
+strict_optional = false
+
+[tool.pytest.ini_options]
+addopts= "--html=report.html --self-contained-html --junitxml=results.xml --disable-warnings"
+log_file_level="ERROR"
+
+[tool.pylint.messages_control]
+disable = [
+    "line-too-long",
+    "missing-module-docstring",
+    "missing-function-docstring"
+]
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]

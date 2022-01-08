@@ -27,7 +27,11 @@ jobs:
         SLACK_CHANNEL: C5BMKV7EV
         SLACK_TOKEN: ${{ secrets.SLACK_TOKEN }}
       run: |
-        poetry run pytest --junitxml=results.xml
+        poetry run pytest
+    - uses: actions/upload-artifact@v2
+      with:
+        name: my-artifact
+        path: ./results.html
     - name: Notify results
       uses: ./
       env:
