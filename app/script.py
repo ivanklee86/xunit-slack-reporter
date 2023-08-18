@@ -1,6 +1,7 @@
 import os
 import sys
 import pathlib
+import time
 from app import constants
 from app.utils import xunit_utils
 from app.utils import slack_utils
@@ -39,11 +40,13 @@ def main():
         file_contains_failures = bool(xunit_report.errors or xunit_report.failures)
 
         # Slack results
+        author_name = ("XUnit Slack Reporter") if (constants.SLACK_MESSAGE_TITLE_ENV_VAR.strip()) else constants.SLACK_MESSAGE_TITLE_ENV_VAR
+
         slack_attachment = {
             "color": constants.PASS_COLOR,
-            "author_name": "XUnit Slack Reporter",
+            "author_name": author_name,
             "author_link": f"https://github.com/{os.getenv('GITHUB_REPOSITORY')}/actions/runs/{os.getenv('GITHUB_RUN_ID')}",
-            "title": f"XUnit test results for {os.getenv('GITHUB_WORKFLOW')} on {os.getenv('GITHUB_REF')}",
+            "title": f"Test results for \"{os.getenv('GITHUB_WORKFLOW')}\" on \"{os.getenv('GITHUB_REF')}\"",
             "fields": []
         }
 
@@ -76,7 +79,7 @@ def main():
 
         slack_attachment['fields'].append({
             "title": "Time elapsed",
-            "value": f"{xunit_report.time} seconds",
+            "value": time.strftime("%H:%M:%S", time.gmtime({xunit_report.time})),
             "short": True
         })
 
