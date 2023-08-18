@@ -1,4 +1,4 @@
-name: 'xUnit Slack Reporter'
+name: 'Junit Slack Notifier'
 description: 'Reports results of tests in xUnit to Slack channel.'
 author: Ivan Lee
 inputs: {}
