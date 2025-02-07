@@ -5,7 +5,7 @@
 
 # Base image
 # ---------------------------------------------------------------------- #
-FROM python:3.10.1
+FROM python:3.13.2
 LABEL MAINTAINER="Ivan Lee"
 
 # Make working directory
