@@ -13,7 +13,7 @@ requests = "^2.27.1"
 
 [tool.poetry.dev-dependencies]
 mypy = "^0.931"
-pylint = "^2.12.2"
+pylint = "^4.0.0"
 pytest = "^6.2.5"
 pytest-cov = "^3.0.0"
 pytest-flake8 = "^1.0.7"
